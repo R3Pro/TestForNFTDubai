@@ -8,6 +8,7 @@ http://localhost:8080/ for inser / show Data
 
 
 %Device% : If you enter the device name, it will be displayed
+
 %User%   : Select the user as admin. Grant permission
 Get All Data
 http://localhost:8080/api/DeviceWithCompany/%User%/%Device% 
