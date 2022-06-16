@@ -20,5 +20,7 @@ Get Device Only
 http://localhost:8080/api/Device/%User%/%Device%
 
 Exemple 1 : http://localhost:8080/api/DeviceWithCompany/admin/
+
 Exemple 2 : http://localhost:8080/api/DeviceWithCompany/admin/S20 Ultra
+
 Exemple 3 : http://localhost:8080/api/DeviceWithCompany/user1/
