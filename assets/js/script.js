@@ -171,7 +171,7 @@ $(document).ready(function(){
         
 
     $("#GetDevicesOnly").click(()=>{
-        GetDataFromServer("Devices")
+        GetDataFromServer("Device")
     })
     $("#GetDevicesWithCompny").click(()=>{
         alert('With company')
