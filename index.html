@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>mongo</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+</head>
+
+<body>
+    <div class="d-lg-flex justify-content-lg-center" style="width: 100vw;margin-top: 10%;"><button class="btn btn-primary" id="ShowAddPhones" type="button" style="margin-right: 20px;width: 150px;">Add Phones</button><button class="btn btn-primary" id="ShowAddCompanies" type="button" style="margin-left: 20px;width: 150px;" >Add Companies</button></div>
+    <div class="d-lg-flex justify-content-lg-center" style="width: 100vw;margin-top: 10%;"><button class="btn btn-secondary" id="GetDevicesOnly" type="button" style="margin-right: 20px;width: 300px;">GetDevices Only</button><button class="btn btn-secondary" id="GetDevicesWithCompny" type="button" style="margin-left: 20px;width: 300px;" >GetDevices With Compny</button></div>
+    <div class="d-lg-flex justify-content-lg-center" style="width: 100vw;margin-top: 1%;">
+        <h4 style="margin-top: 4px;">Search Devices :</h4><input type="search" id="SearchDev"><select id="setUserID" style="margin-left: 50px;">
+            <optgroup label="Users">
+                <option value="" selected="">admin</option>
+                <option value="">user1</option>
+                <option value="">user2</option>
+            </optgroup>
+        </select>
+    </div>
+    <div style="width: 70%;height: 50vh;margin-right: 15%;margin-left: 15%;margin-top: 5%;border-style: solid;border-radius: 5px;">
+        <h6>Server response -&gt;</h6>
+        <div id="JsonReponse" style="width: 100%;height: 90%;padding-right: 10px;padding-left: 10px;padding-top: 10px;"></div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="company">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Title</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-lg-flex align-items-lg-center" style="margin-bottom: 10px;">
+                        <h6>Company Name :&nbsp;</h6><input type="text" id="compName" style="margin-right: 20px;">
+                        <h6>Company Country :&nbsp;</h6><input type="text" id="compConutry">
+                    </div>
+                    <div class="d-lg-flex align-items-lg-center" style="width: 100%;">
+                        <div class="input-group" style="float: left;width: 80%;margin-right: auto;"><span class="input-group-text">Logo</span><input class="form-control" type="text" id="compLogoUrl"></div><button class="btn btn-primary" id="addCompany" type="button" style="float: right;">Add Company</button>
+                    </div>
+                    <div class="table-responsive" style="border-style: solid;margin-top: 25px;border-radius: 5px;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="setWidth">Company Name</th>
+                                    <th class="setWidth">Company Country</th>
+                                    <th class="setWidth">Logo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="CompnyBody" style="max-height: 300px;">
+                                <tr>
+                                    <td>Cell 1</td>
+                                    <td>Cell 2</td>
+                                    <td>Cell 2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" id="saveCopmanies" type="button">Save</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" tabindex="-1" id="phones">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Title</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="border-style: solid;border-radius: 6px;height: auto;">
+                        <div class="d-lg-flex align-items-lg-center" style="padding: 12px;">
+                            <h6 style="margin-top: 8px;">Model :&nbsp;</h6><input type="text" id="phModel" placeholder="Model" style="margin-right: 20px;">
+                            <h6 style="margin-top: 8px;"><span style="color: rgb(0, 0, 0); background-color: rgb(250, 250, 250);">Released</span>&nbsp;:&nbsp;</h6><input id="phDate" type="date" style="margin-right: 20px;">
+                            <h6 style="margin-top: 8px;">Company :&nbsp;</h6><select id="phCompany">
+                                <optgroup label="This is a group">
+                                    <option value="12" selected="">This is item 1</option>
+                                    <option value="13">This is item 2</option>
+                                    <option value="14">This is item 3</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="d-lg-flex align-items-lg-center" style="padding: 7px;">
+                            <h6 style="margin-top: 3px;">Colors :&nbsp;</h6>
+                            <div class="form-check" style="margin-right: 10px;"><input class="form-check-input" type="checkbox" id="Check-Color-0"><label class="form-check-label" id="colore-0" for="formCheck-9"><span style="color: rgb(0, 0, 0); background-color: rgb(250, 250, 250);">Prism White</span></label></div>
+                            <div class="form-check" style="margin-right: 10px;"><input class="form-check-input" type="checkbox" id="Check-Color-1"><label class="form-check-label" id="colore-1" for="formCheck-10"><span style="color: rgb(0, 0, 0); background-color: rgb(250, 250, 250);">Prism Black</span></label></div>
+                            <div class="form-check" style="margin-right: 10px;"><input class="form-check-input" type="checkbox" id="Check-Color-2"><label class="form-check-label" id="colore-2" for="formCheck-11"><span style="color: rgb(0, 0, 0); background-color: rgb(250, 250, 250);">Prism Green</span></label></div>
+                            <div class="form-check" style="margin-right: 10px;"><input class="form-check-input" type="checkbox" id="Check-Color-3"><label class="form-check-label" id="colore-3" for="formCheck-12"><span style="color: rgb(0, 0, 0); background-color: rgb(250, 250, 250);">Prism Blue</span></label></div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="Check-Color-4"><label class="form-check-label" id="colore-4" for="formCheck-13"><span style="color: rgb(0, 0, 0); background-color: rgb(250, 250, 250);">Canary Yellow</span></label></div>
+                        </div>
+                        <div class="d-lg-flex align-items-lg-center" style="padding: 7px;">
+                            <h6 style="margin-top: 3px;">Permissions :&nbsp;</h6>
+                            <div class="form-check" style="margin-right: 10px;"><input class="form-check-input" type="checkbox" id="isHidden"><label class="form-check-label" id="sHidden" for="formCheck-16"><span style="color: rgb(34, 34, 34); background-color: transparent;">Hidden</span><br></label></div><button class="btn btn-outline-primary" id="addVersion" type="button" style="position: absolute;right: 25px;">add version</button>
+                        </div>
+                        <div style="max-height: 145px;overflow: auto;">
+                            <div class="align-items-lg-center" id="divVersion" style="padding: 7px;width: 100%;">
+                                <div class="d-lg-flex align-items-lg-center">
+                                    <h6 style="margin-top: 5px;">version :&nbsp;</h6><input type="text" id="vorsion-0" style="margin-right: 20px;">
+                                    <h6 style="margin-top: 5px;">Destined :&nbsp;</h6><select id="destined-0" style="margin-top: 5px;">
+                                        <optgroup label="This is a group">
+                                            <option value="12" selected="">Asia</option>
+                                            <option value="13">china</option>
+                                            <option value="14">UAE</option>
+                                            <option value="">USA</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%;height: 30px;padding-top: 5px;"><button class="btn btn-primary" id="AddPhone" type="button" style="float: right;">Add Phone</button></div>
+                    <div class="table-responsive" style="border-style: solid;margin-top: 25px;border-radius: 5px;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="setWidth">Company</th>
+                                    <th class="setWidth">Model</th>
+                                    <th class="setWidth">Released</th>
+                                    <th class="setWidth">Colors</th>
+                                    <th class="setWidth">Permissions</th>
+                                    <th class="setWidth" style="width: 20%;">versions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="PhonesBody" style="max-height: 300px;">
+                                <tr style="height: 38.5px;">
+                                    <td>Cell 1</td>
+                                    <td>Cell 2pppppppppppppppppp&nbsp; &nbsp; &nbsp; kmlm</td>
+                                    <td>oooooooooooooooooooooo</td>
+                                    <td class="text-nowrap text-truncate text-break" style="width: 15%;">uiuuug <br>jkh<br>khfuhgvjhukjkkkkkkkkkkkkkjujgyhjb uuuuuuuuuu</td>
+                                    <td class="text-nowrap">llllppopopo</td>
+                                    <td class="text-nowrap">Cell 2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" id="PhonesSave" type="button">Save</button></div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
